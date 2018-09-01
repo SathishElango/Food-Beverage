@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bs_food_beverage"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="#FFDB00"
+    android:orientation="vertical"
+    android:paddingBottom="18dp"
+    android:paddingEnd="24dp"
+    android:paddingStart="24dp"
+    android:paddingTop="18dp"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="54dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/f_b_summary"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/fb_summary_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <include layout="@layout/food_beverage_summary_item" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
