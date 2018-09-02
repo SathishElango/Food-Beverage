@@ -27,11 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:orientation="vertical">
-
-        <include layout="@layout/food_beverage_summary_item" />
-
-
-    </LinearLayout>
+        android:orientation="vertical" />
 
 </LinearLayout>

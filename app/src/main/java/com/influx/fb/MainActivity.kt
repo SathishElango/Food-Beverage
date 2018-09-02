@@ -3,11 +3,13 @@ package com.influx.fb
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,8 +21,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.influx.fb.adapter.FoodAndBeverageAdapter
+import com.influx.fb.model.FnB
+import com.influx.fb.model.FnBSubItem
 import com.influx.fb.model.Food
 import com.influx.fb.viewmodel.FnBViewModel
+import kotlinx.android.synthetic.main.sub_item.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,10 +46,26 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getFoodList().observe(this, Observer { foodList ->
             Log.d("FOOD LIST COUNT : ", foodList?.size.toString())
-            updateView(foodList!!)
+            updateView(foodList!!, viewModel)
         })
 
         viewModel.init()
+
+
+        viewModel.updateFnBSummary().observe(this, Observer { fnbList ->
+
+            var totalPrice: Int = 0
+            val fb_summary_item_container = findViewById<LinearLayout>(R.id.fb_summary_item_container)
+            fb_summary_item_container.removeAllViews()
+            for (fnb in fnbList!!) {
+                totalPrice += fnb.totalITemPrice.toInt()
+                fb_summary_item_container.addView(getFnBSummaryItemView(fnb))
+            }
+
+            val tvTotalPrice = findViewById<TextView>(R.id.tvTotalPrice)
+            tvTotalPrice.text = totalPrice.toString()
+
+        })
 
         val bottomSheet = findViewById<LinearLayout>(R.id.bs_food_beverage);
         val behaviour = BottomSheetBehavior.from(bottomSheet);
@@ -63,14 +84,24 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun updateView(foodList: List<Food>) {
+
+    private fun getFnBSummaryItemView(fnb: FnB): View {
+
+        val view = LayoutInflater.from(this).inflate(R.layout.food_beverage_summary_item, null)
+        view.findViewById<TextView>(R.id.tvFoodName).text = fnb.Name + "(" + fnb.orderQty + ")"
+        view.findViewById<TextView>(R.id.tvPrice).text = fnb.totalITemPrice.toString()
+
+        return view
+    }
+
+    private fun updateView(foodList: List<Food>, viewModel: FnBViewModel) {
 
         foodList.get(0).isSelected = true;
         loadTabs(foodList)
 
         recyclerView?.layoutManager = LinearLayoutManager(this)
 
-        foodAndBeverageAdapter = FoodAndBeverageAdapter(foodList.get(0).fnblist, this)
+        foodAndBeverageAdapter = FoodAndBeverageAdapter(foodList.get(0).fnblist, this, viewModel)
         recyclerView?.adapter = foodAndBeverageAdapter
 
     }

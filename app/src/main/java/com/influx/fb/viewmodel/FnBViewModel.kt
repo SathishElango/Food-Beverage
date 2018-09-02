@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import com.influx.fb.model.FnB
 import com.influx.fb.model.Food
 import com.influx.fb.model.Response.FnBResponse
 import com.influx.fb.webservice.APIClient
@@ -15,9 +16,15 @@ import retrofit2.Response
 class FnBViewModel() : ViewModel() {
 
     val foodList = MutableLiveData<List<Food>>()
+    val selectedFoodList = MutableLiveData<ArrayList<FnB>>()
+    var selectedFoodArrayList: ArrayList<FnB> = arrayListOf()
 
     fun getFoodList(): LiveData<List<Food>> {
         return foodList
+    }
+
+    fun updateFnBSummary(): MutableLiveData<ArrayList<FnB>> {
+        return selectedFoodList
     }
 
     fun init() {
@@ -38,5 +45,30 @@ class FnBViewModel() : ViewModel() {
         })
     }
 
+    fun updateSelectedList(fnb: FnB) {
+        val tempSelectedFoodArrayList : ArrayList<FnB> = selectedFoodArrayList
+//        if (tempSelectedFoodArrayList.size == 0) {
+            selectedFoodArrayList.add(fnb)
+//        }
+        for (selectedFoodListItem in tempSelectedFoodArrayList) {
+            if (fnb.VistaFoodItemId.equals(selectedFoodListItem.VistaFoodItemId)) {
+                selectedFoodListItem.totalITemPrice = fnb.totalITemPrice
+                selectedFoodListItem.orderQty = fnb.orderQty
+            } else {
+//                selectedFoodArrayList.add(fnb)
+            }
+        }
+        selectedFoodList.value = selectedFoodArrayList
+    }
+
+    fun removeItem(fnb: FnB) {
+        val tempSelectedFoodArrayList : ArrayList<FnB> = selectedFoodArrayList
+        for (selectedFoodListItem in tempSelectedFoodArrayList) {
+            if (fnb.VistaFoodItemId.equals(selectedFoodListItem.VistaFoodItemId)) {
+//                selectedFoodArrayList.remove(fnb)
+            }
+        }
+        selectedFoodList.value = selectedFoodArrayList
+    }
 
 }

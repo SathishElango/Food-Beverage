@@ -3,22 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingTop="10dp">
 
     <TextView
+        android:id="@+id/tvFoodName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:id="@+id/tvFoodName"
         android:text="HOLSTEN BEER (1)"
         android:textColor="@android:color/black"
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="8.0"
-        android:id="@+id/tvPrice"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold" />

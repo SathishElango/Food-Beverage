@@ -5,5 +5,6 @@ data class FnBSubItem(
         var PriceInCents: String,
         var SubitemPrice: String,
         var VistaParentFoodItemId: String,
-        var VistaSubFoodItemId: String
+        var VistaSubFoodItemId: String,
+        var isSelected: Boolean = false
 )

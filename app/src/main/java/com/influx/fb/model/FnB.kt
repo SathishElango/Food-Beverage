@@ -13,5 +13,6 @@ data class FnB(
         var SubItemCount: Int,
         var ImgUrl: String,
         var subitems: List<FnBSubItem>,
-        var orderQty: Int = 0
+        var orderQty: Int = 0,
+        var totalITemPrice: Double = 0.00
 )
