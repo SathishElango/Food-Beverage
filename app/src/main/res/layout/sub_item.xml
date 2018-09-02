@@ -4,9 +4,10 @@
     android:layout_height="wrap_content"
     android:background="@drawable/sub_item_bg"
     android:paddingBottom="8dp"
-    android:paddingEnd="24dp"
-    android:paddingStart="24dp"
+    android:paddingEnd="18dp"
+    android:paddingStart="18dp"
     android:paddingTop="8dp"
     android:text="NORMAL"
-  android:layout_marginEnd="16dp"
+    android:textSize="12sp"
+    android:id="@+id/tvSubItemType"
     android:textColor="#a4a4a4"/>

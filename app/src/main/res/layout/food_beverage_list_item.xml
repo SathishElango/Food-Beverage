@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
+    android:layout_marginBottom="24dp"
     android:background="@drawable/food_beverage_list_item_bg"
     android:paddingBottom="12dp">
 
@@ -20,19 +20,15 @@
         android:id="@+id/llSubItemsContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:divider="@drawable/sub_item_vertical_divider"
         android:orientation="horizontal"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
-        android:layout_marginLeft="16dp"
+        android:showDividers="middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivFoodPic">
-
-        <include layout="@layout/sub_item" />
-
-        <include layout="@layout/sub_item" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ivFoodPic" />
 
     <TextView
         android:id="@+id/tvFoodName"
@@ -40,13 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:ellipsize="end"
-        android:maxLines="2"
-        android:text="MEXICAN BURGER WITH CHIPS"
+        android:maxLines="1"
+        android:text="MEXICAN"
         android:textColor="@android:color/white"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@+id/ivSub"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llSubItemsContainer" />
 
@@ -56,15 +52,14 @@
         android:layout_height="wrap_content"
         android:text="AED 15"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvFoodName"
         app:layout_constraintTop_toBottomOf="@+id/tvFoodName" />
 
     <ImageView
         android:id="@+id/ivSub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="@id/tvPrice"
         app:layout_constraintEnd_toStartOf="@id/tvQty"
         app:layout_constraintTop_toTopOf="@+id/tvFoodName"
@@ -85,8 +80,8 @@
 
     <ImageView
         android:id="@+id/ivAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/tvQty"
         app:layout_constraintEnd_toEndOf="parent"

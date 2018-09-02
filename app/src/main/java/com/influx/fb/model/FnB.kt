@@ -12,5 +12,6 @@ data class FnB(
         var OtherExperience: String,
         var SubItemCount: Int,
         var ImgUrl: String,
-        var subitems: List<FnBSubItem>
+        var subitems: List<FnBSubItem>,
+        var orderQty: Int = 0
 )
