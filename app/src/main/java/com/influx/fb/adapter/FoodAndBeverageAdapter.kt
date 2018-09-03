@@ -2,6 +2,7 @@ package com.influx.fb.adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,8 @@ class FoodAndBeverageAdapter(var foodItemList: List<FnB>, val context: Context, 
         holder.tvFoodName.text = fnb.Name
         holder.tvPrice.text = Constants.CURRENCY + " " + fnb.totalITemPrice.toInt()
         holder.tvQty.text = fnb.orderQty.toString()
+
+
 
         //Inflates subItem [small, medium, large] into the container dynamically
         holder.llSubItemsContainer.removeAllViews()
