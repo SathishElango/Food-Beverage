@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import com.influx.fb.Utils.Constants
 import com.influx.fb.model.FnB
 import com.influx.fb.model.Food
 import com.influx.fb.model.Response.FnBResponse
@@ -27,6 +28,9 @@ class FnBViewModel() : ViewModel() {
         return selectedFoodList
     }
 
+    /**
+     * Initiates the retrofit web service call
+     */
     fun init() {
 
         val apiService = APIClient.client.create(APIInterface::class.java)
@@ -36,6 +40,7 @@ class FnBViewModel() : ViewModel() {
             override fun onResponse(call: Call<FnBResponse>?, response: Response<FnBResponse>?) {
 
                 val fnBResponse: FnBResponse = response?.body()!!
+                Constants.CURRENCY = fnBResponse.Currency
                 foodList.value = fnBResponse.FoodList
             }
 
@@ -45,11 +50,19 @@ class FnBViewModel() : ViewModel() {
         })
     }
 
+    /**
+     * Adds the selected food item into selected list which later updates
+     * the F&B Summary slider
+     */
     fun addItemToSelectedList(fnb: FnB) {
         selectedFoodArrayList.add(fnb)
         selectedFoodList.value = selectedFoodArrayList
     }
 
+    /**
+     * Updates quantity and price of the respective food item in selected list
+     * which updates the F&B Summary slider
+     */
     fun updateSelectedList(fnb: FnB) {
         for (selectedFoodListItem in selectedFoodArrayList) {
             if (fnb.VistaFoodItemId.equals(selectedFoodListItem.VistaFoodItemId)) {
@@ -61,6 +74,10 @@ class FnBViewModel() : ViewModel() {
         selectedFoodList.value = selectedFoodArrayList
     }
 
+    /**
+     * Removes a food item (when its quantity decreased to 0) from the selected list which updates
+     * the F&B Summary slider
+     */
     fun removeItem(fnb: FnB) {
         val tempSelectedFoodArrayList: ArrayList<FnB> = arrayListOf()
         tempSelectedFoodArrayList.addAll(selectedFoodArrayList)

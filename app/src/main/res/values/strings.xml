@@ -2,4 +2,8 @@
     <string name="app_name">F&amp;B</string>
     <string name="action_bar_title"><![CDATA[F&B]]></string>
     <string name="f_b_summary"><![CDATA[F&B SUMMARY]]></string>
+    <string name="currency">AED </string>
+    <string name="pay">PAY</string>
+    <string name="skip">SKIP</string>
+    <string name="no_internet_connection_tap_to_retry">No Internet Connection. Tap to retry</string>
 </resources>
