@@ -45,27 +45,28 @@ class FnBViewModel() : ViewModel() {
         })
     }
 
+    fun addItemToSelectedList(fnb: FnB) {
+        selectedFoodArrayList.add(fnb)
+        selectedFoodList.value = selectedFoodArrayList
+    }
+
     fun updateSelectedList(fnb: FnB) {
-        val tempSelectedFoodArrayList : ArrayList<FnB> = selectedFoodArrayList
-//        if (tempSelectedFoodArrayList.size == 0) {
-            selectedFoodArrayList.add(fnb)
-//        }
-        for (selectedFoodListItem in tempSelectedFoodArrayList) {
+        for (selectedFoodListItem in selectedFoodArrayList) {
             if (fnb.VistaFoodItemId.equals(selectedFoodListItem.VistaFoodItemId)) {
                 selectedFoodListItem.totalITemPrice = fnb.totalITemPrice
                 selectedFoodListItem.orderQty = fnb.orderQty
-            } else {
-//                selectedFoodArrayList.add(fnb)
+                break;
             }
         }
         selectedFoodList.value = selectedFoodArrayList
     }
 
     fun removeItem(fnb: FnB) {
-        val tempSelectedFoodArrayList : ArrayList<FnB> = selectedFoodArrayList
+        val tempSelectedFoodArrayList: ArrayList<FnB> = arrayListOf()
+        tempSelectedFoodArrayList.addAll(selectedFoodArrayList)
         for (selectedFoodListItem in tempSelectedFoodArrayList) {
             if (fnb.VistaFoodItemId.equals(selectedFoodListItem.VistaFoodItemId)) {
-//                selectedFoodArrayList.remove(fnb)
+                selectedFoodArrayList.remove(fnb)
             }
         }
         selectedFoodList.value = selectedFoodArrayList

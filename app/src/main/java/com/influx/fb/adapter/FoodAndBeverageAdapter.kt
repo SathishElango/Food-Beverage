@@ -31,7 +31,7 @@ class FoodAndBeverageAdapter(var foodItemList: List<FnB>, val context: Context, 
 
         val fnb = foodItemList.get(position)
 
-        Picasso.get().load(fnb.ImgUrl).into(holder.ivFoodPic)
+        Picasso.get().load(fnb.ImgUrl).fit().centerCrop().into(holder.ivFoodPic)
         holder.tvFoodName.text = fnb.Name
         holder.tvPrice.text = "AED " + fnb.totalITemPrice.toInt()
         holder.tvQty.text = fnb.orderQty.toString()
@@ -65,7 +65,12 @@ class FoodAndBeverageAdapter(var foodItemList: List<FnB>, val context: Context, 
                 holder.tvPrice.text = "AED " + getTotalItemPrice(fnb).toInt()
                 holder.tvQty.text = fnb.orderQty.toString()
 
-                viewModel.updateSelectedList(fnb)
+                if (fnb.orderQty == 1) {
+                    viewModel.addItemToSelectedList(fnb)
+                } else {
+                    viewModel.updateSelectedList(fnb)
+                }
+
             } else {
                 Toast.makeText(context, "Select a size", Toast.LENGTH_SHORT).show()
             }
@@ -129,6 +134,7 @@ class FoodAndBeverageAdapter(var foodItemList: List<FnB>, val context: Context, 
             subItem.isSelected = subItem.Name.equals(subItemName)
         }
         foodItemList.get(position).totalITemPrice = getTotalItemPrice(foodItemList.get(position))
+        viewModel.updateSelectedList(foodItemList.get(position))
         notifyItemChanged(position)
     }
 
