@@ -13,7 +13,6 @@
         android:background="@android:color/black"
         android:paddingBottom="6dp"
         android:paddingTop="6dp"
-        android:text="DRINKS"
         android:id="@+id/tvTabName"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
